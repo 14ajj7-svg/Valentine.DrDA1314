@@ -1,0 +1,175 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(-45deg,#ff9a9e,#fecfef,#ffd6e0,#ffe3ec);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+h2 { color:#ff4d6d; }
+
+button {
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    margin:10px;
+    cursor:pointer;
+}
+
+#yesBtn { background:#ff4d6d; color:white; }
+#noBtn { background:#eee; position:absolute; }
+
+#loveMessage {
+    margin-top:15px;
+    font-size:20px;
+    color:#ff4d6d;
+    min-height:40px;
+}
+
+#unlockBtn {
+    display:none;
+    background:#ff85a2;
+    color:white;
+}
+
+#secretMessage {
+    display:none;
+    margin-top:15px;
+    font-size:18px;
+    color:#d6336c;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(10px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+.heart {
+    position:absolute;
+    font-size:20px;
+    animation:floatUp 4s linear infinite;
+}
+
+@keyframes floatUp {
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-800px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Dhara, will you be my Valentine? ❤️</h2>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No</button>
+
+    <div id="loveMessage"></div>
+
+    <button id="unlockBtn" onclick="unlockSecret()">
+        Tap to unlock a secret 💌
+    </button>
+
+    <div id="secretMessage">
+        It has been 9 years together, and I can honestly say that making you mine was the best decision of my life. You have been my sunshine through everything — the one who makes even the ordinary days feel bright and meaningful. Your smile, your warmth, and your presence make every day better just by being there.
+Thank you for walking beside me through all these years, for your love, patience, and for making our life so beautiful. Here’s to many more years, decades, and a lifetime filled with laughter, happiness, and even more love. 
+
+Love you, Dhara ❤️
+
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const message =
+"Yaay! You just made me the happiest person alive ❤️";
+
+function yesClicked(){
+    document.getElementById("music").play();
+    typeWriter();
+    startHearts();
+
+    setTimeout(()=>{
+        document.getElementById("unlockBtn").style.display="inline-block";
+    }, 3000);
+}
+
+function typeWriter(){
+    let i=0;
+    let speed=50;
+    let area=document.getElementById("loveMessage");
+
+    function typing(){
+        if(i < message.length){
+            area.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+function unlockSecret(){
+    document.getElementById("secretMessage").style.display="block";
+}
+
+function moveNo(){
+    let btn=document.getElementById("noBtn");
+    let x=Math.random()*(window.innerWidth-100);
+    let y=Math.random()*(window.innerHeight-50);
+    btn.style.left=x+"px";
+    btn.style.top=y+"px";
+}
+
+function startHearts(){
+    setInterval(createHeart,200);
+}
+
+function createHeart(){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.bottom="0px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+}
+</script>
+
+</body>
+</html>
